@@ -57,4 +57,28 @@ public class StockDAO {
 		// Listを返却する。0件の場合は空のListが返却される。
 		return result;
 	}
+	
+	public static int Registersuccess(Stock bihin) {
+	
+		
+		String sql = "INSERT INTO teambihin VALUES(default, ?, ?)";
+
+		// return用の変数
+		int result = 0;
+		
+		try (
+				Connection con = getConnection();	// DB接続
+				PreparedStatement pstmt = con.prepareStatement(sql);			// 構文解析
+				){
+			pstmt.setString(1, bihin.getName());
+			pstmt.setInt(2, bihin.getNum());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException | URISyntaxException e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println(result + "件更新しました。");
+		}
+		return result;
+	}
 }
