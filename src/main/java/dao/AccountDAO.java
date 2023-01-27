@@ -36,7 +36,6 @@ public class AccountDAO {
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				){
 			pstmt.setString(1, mail);
-			pstmt.setString(2, mail);
 
 			try (ResultSet rs = pstmt.executeQuery()){
 				
@@ -61,8 +60,7 @@ public class AccountDAO {
 					PreparedStatement pstmt = con.prepareStatement(sql);
 					){
 				pstmt.setString(1, mail);
-				pstmt.setString(2, mail);
-				pstmt.setString(3, hashedPw);
+				pstmt.setString(2, hashedPw);
 
 				try (ResultSet rs = pstmt.executeQuery()){
 					
