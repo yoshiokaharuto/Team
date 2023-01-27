@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.StockDAO;
+import dto.Account;
 import dto.Stock;
 
 
@@ -33,6 +35,18 @@ public class listServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Account account = (Account)session.getAttribute("user");
+
+		if(account == null){
+			//セッションの中身がnullであれば不正アクセスと判断し
+			//ログイン画面へ戻る
+			String view = "./";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+			dispatcher.forward(request, response);
+			return;
+		}
+		
 		List<Stock> bookList = StockDAO.All();
 		request.setAttribute("list", bookList);
 		
