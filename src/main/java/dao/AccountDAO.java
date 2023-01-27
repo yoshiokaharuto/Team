@@ -91,7 +91,7 @@ public class AccountDAO {
 			String salt = GenerateSalt.getSalt(32);
 			
 			// 取得したソルトを使って平文PWをハッシュ
-			String hashedPw = GenerateHashedPw.getSafetyPassword(account.getHashedPw(), salt);
+			String hashedPw = GenerateHashedPw.getSafetyPassword(account.getPw(), salt);
 			
 			try (
 					Connection con = getConnection();
