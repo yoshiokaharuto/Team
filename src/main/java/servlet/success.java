@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javax.servlet.http.HttpSession;
+
 import dao.StockDAO;
+import dto.Account;
+
 import dto.Stock;
 
 /**
@@ -31,7 +35,19 @@ public class success extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	request.setCharacterEncoding("UTF-8");
+
+		HttpSession session = request.getSession();
+		Account account = (Account)session.getAttribute("user");
+
+		if(account == null){
+			//セッションの中身がnullであれば不正アクセスと判断し
+			//ログイン画面へ戻る
+			String view = "./";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+			dispatcher.forward(request, response);
+			return;
+		}
+		request.setCharacterEncoding("UTF-8");
 		
 		// フォーム入力内容の取得
 		String name = request.getParameter("name");
