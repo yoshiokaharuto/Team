@@ -84,7 +84,7 @@ public class AccountDAO {
 		}
 		
 		public static int registerAccount(Account account) {
-			String sql = "INSERT INTO development VALUES(default, ? , ? , ? )";
+			String sql = "INSERT INTO teamaccount VALUES(default, ? , ? , ? )";
 			int result = 0;
 			
 			// ランダムなソルトの取得(今回は32桁で実装)
