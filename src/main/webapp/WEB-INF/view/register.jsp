@@ -10,9 +10,9 @@
 		<h2>新規登録</h2>
 		
 		<form action="registerConfirmServlet" method="post">
-		<input type="text" name="name"> <br>
-		<input type="email" name="mail"> <br>
-		<input type="password" name="pw"> <br>
+		名前:<input type="text" name="name"> <br>
+		メール:<input type="email" name="mail"> <br>
+		パスワード:<input type="password" name="pw"> <br>
 		
 		<input type="submit" value="登録"> <br>
 		</form>
