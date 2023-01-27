@@ -8,23 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import javax.servlet.http.HttpSession;
 
 import dto.Account;
 
-
 /**
- * Servlet implementation class formServlet
+ * Servlet implementation class TopServlet
  */
-@WebServlet("/formServlet")
-public class formServlet extends HttpServlet {
+@WebServlet("/TopServlet")
+public class TopServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public formServlet() {
+    public TopServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +31,16 @@ public class formServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		HttpSession session = request.getSession();
 		Account account = (Account)session.getAttribute("user");
-
-		if(account == null){
-			//セッションの中身がnullであれば不正アクセスと判断し
-			//ログイン画面へ戻る
+		
+		if(account == null) {
 			String view = "./";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 			dispatcher.forward(request, response);
 			return;
 		}
-		
-
-		String view = "WEB-INF/view/form.jsp";
+		String view = "WEB-INF/view/menu.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
 	}
